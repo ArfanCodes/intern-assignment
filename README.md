@@ -1,97 +1,187 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# ProductExplorer
 
-# Getting Started
+<p align="center">
+  <strong>A polished React Native product browsing app built for smooth discovery, fast search, and reliable local saving.</strong>
+</p>
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+<p align="center">
+  ProductExplorer connects to the DummyJSON API and turns a simple catalog into a clean mobile experience. It focuses on the essentials that make browsing feel good in practice: responsive search, infinite loading, persistent saved items, and clear detail views.
+</p>
 
-## Step 1: Start Metro
+<p align="center">
+  <a href="#overview">Overview</a> |
+  <a href="#highlights">Highlights</a> |
+  <a href="#tech-stack">Tech Stack</a> |
+  <a href="#project-structure">Project Structure</a> |
+  <a href="#getting-started">Getting Started</a> |
+  <a href="#screens">Screens</a>
+</p>
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+<p align="center">
+  <img src="https://img.shields.io/badge/React%20Native-0.84.1-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React Native badge" />
+  <img src="https://img.shields.io/badge/React-19.2.3-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React badge" />
+  <img src="https://img.shields.io/badge/TypeScript-5.8.3-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript badge" />
+  <img src="https://img.shields.io/badge/Redux%20Toolkit-2.6.1-764ABC?style=for-the-badge&logo=redux&logoColor=white" alt="Redux Toolkit badge" />
+</p>
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+---
 
-```sh
-# Using npm
-npm start
+## Overview
 
-# OR using Yarn
-yarn start
+ProductExplorer is a mobile-first catalog app for browsing products, searching across listings, opening rich detail pages, and saving favorites locally for later. The project is structured like a production-ready React Native application, with clear separation between API calls, state management, navigation, reusable components, and screen-level logic.
+
+### Built To Demonstrate
+
+- Clean product listing with paginated loading
+- Debounced search for faster and more stable queries
+- Persistent saved products using local storage
+- Smooth navigation between list, details, and saved items
+- Resilient UI states for loading, empty results, and errors
+
+## Highlights
+
+| Section | Details |
+| --- | --- |
+| `Browse` | Infinite scrolling product feed backed by DummyJSON pagination |
+| `Search` | Debounced query handling to reduce noisy requests |
+| `Details` | Product pricing, ratings, metadata, and focused item presentation |
+| `Save` | Save and unsave items from multiple screens with persisted state |
+| `Refresh` | Pull-to-refresh support for quick data reloads |
+| `Stability` | Error handling and empty-state coverage across the UI |
+
+## Tech Stack
+
+| Layer | Package / Tool | Version |
+| --- | --- | --- |
+| Runtime | Node.js | `>= 22.11.0` |
+| Framework | `react-native` | `0.84.1` |
+| UI | `react` | `19.2.3` |
+| Language | `typescript` | `^5.8.3` |
+| State | `@reduxjs/toolkit` | `^2.6.1` |
+| State | `react-redux` | `^9.2.0` |
+| Persistence | `redux-persist` | `^6.0.0` |
+| Storage | `@react-native-async-storage/async-storage` | `^2.1.2` |
+| Navigation | `@react-navigation/native` | `^7.1.6` |
+| Navigation | `@react-navigation/native-stack` | `^7.3.10` |
+| Android | `minSdkVersion` | `24` |
+| Android | `compileSdkVersion` | `36` |
+| Android | `targetSdkVersion` | `36` |
+| Android | `buildToolsVersion` | `36.0.0` |
+| Android | Kotlin | `2.1.20` |
+| Android | Gradle Wrapper | `9.0.0` |
+| iOS | Deployment target | Managed by `min_ios_version_supported` in Podfile |
+
+## Project Structure
+
+```text
+src/
+  api/           API service layer
+  components/    Reusable UI building blocks
+  hooks/         Custom React hooks
+  navigation/    Navigation setup and stacks
+  redux/         Store, slices, and persisted state
+  screens/       Screen-level views
+  types/         Shared TypeScript types
+  utils/         Theme values and helper utilities
 ```
 
-## Step 2: Build and run your app
+## Getting Started
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### 1. Install dependencies
 
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```bash
+npm install
 ```
 
-### iOS
+### 2. Install iOS pods (macOS only)
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
+```bash
 bundle install
+bundle exec pod install --project-directory=ios
 ```
 
-Then, and every time you update your native dependencies, run:
+### 3. Configure Android SDK on Windows
 
-```sh
-bundle exec pod install
+If Android builds fail because the SDK path is missing, create `android/local.properties`:
+
+```properties
+sdk.dir=C:\\Users\\<YourUser>\\AppData\\Local\\Android\\Sdk
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+If `adb` or `emulator` is not recognized, add these folders to your `PATH`:
 
-```sh
-# Using npm
+- `%LOCALAPPDATA%\Android\Sdk\platform-tools`
+- `%LOCALAPPDATA%\Android\Sdk\emulator`
+
+## Run The App
+
+### Start Metro
+
+```bash
+npm start
+```
+
+### Run on Android
+
+```bash
+npm run android
+```
+
+### Run on iOS
+
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Available Scripts
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+| Script | Command | Purpose |
+| --- | --- | --- |
+| Start Metro | `npm start` | Start the React Native bundler |
+| Run Android | `npm run android` | Build and launch the Android app |
+| Run iOS | `npm run ios` | Build and launch the iOS app |
+| Lint | `npm run lint` | Run ESLint |
+| Test | `npm test` | Run Jest |
 
-## Step 3: Modify your app
+## API Reference
 
-Now that you have successfully run the app, let's make changes!
+Base URL: `https://dummyjson.com`
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /products?limit=&skip=` | Browse products with pagination |
+| `GET /products/search?q=&limit=&skip=` | Search products with pagination |
+| `GET /products/{id}` | Fetch a single product detail |
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## Screens
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <strong>Product List</strong><br/>
+      <img src="docs/screenshots/01-product-list.png" alt="Product list screen" width="260" />
+    </td>
+    <td align="center" width="50%">
+      <strong>Search Results</strong><br/>
+      <img src="docs/screenshots/02-search-results.png" alt="Search results screen" width="260" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <strong>Product Details</strong><br/>
+      <img src="docs/screenshots/03-product-details.png" alt="Product details screen" width="260" />
+    </td>
+    <td align="center" width="50%">
+      <strong>Saved Products</strong><br/>
+      <img src="docs/screenshots/04-saved-products.png" alt="Saved products screen" width="260" />
+    </td>
+  </tr>
+</table>
 
-## Congratulations! :tada:
+Add future screenshots in `docs/screenshots/` and keep the same naming pattern for consistency.
 
-You've successfully run and modified your React Native App. :partying_face:
+## Notes
 
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Saved products are persisted locally with Redux Persist and AsyncStorage.
+- The architecture is flexible enough to swap DummyJSON for another backend later.
+- The current setup is well-suited for extending into filters, sorting, authentication, or cart flows.
